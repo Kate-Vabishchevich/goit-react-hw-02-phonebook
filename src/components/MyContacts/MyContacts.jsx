@@ -2,7 +2,7 @@ import { Component } from "react";
 import { nanoid } from 'nanoid';
 import css from './MyContacts.module.css';
 import ContactsForm from "./ContactsForm/ContactsForm";
-import ContactsSearch from "./ContactsSearch/ContactsSearch";
+// import ContactsSearch from "./ContactsSearch/ContactsSearch";
 
 class MyContacts extends Component {
     state = {
