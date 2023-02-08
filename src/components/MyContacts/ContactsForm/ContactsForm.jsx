@@ -10,7 +10,7 @@ class ContactsForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const { onSubmit } = this.props
+        const { onSubmit } = this.props;
         const result = onSubmit({ ...this.state });
         if (result) {
             this.reset();

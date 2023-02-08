@@ -2,7 +2,7 @@ import { Component } from "react";
 import { nanoid } from 'nanoid';
 import css from './MyContacts.module.css';
 import ContactsForm from "./ContactsForm/ContactsForm";
-// import ContactsSearch from "./ContactsSearch/ContactsSearch";
+import ContactsSearch from "./ContactsSearch/ContactsSearch";
 
 class MyContacts extends Component {
     state = {
@@ -43,13 +43,22 @@ class MyContacts extends Component {
         return Boolean(result);
     };
 
+    handleFind = ({ target }) => {
+        this.setState({ filter: target.value });
+    };
+
     render() {
-        const { addContact } = this;
+        const { addContact, handleFind } = this;
         return (
             <div>
                 <div>
                     <h2 className={css.title}>Phonebook</h2>
                     <ContactsForm onSubmit={addContact} />
+                </div>
+
+                <div>
+                    <h2 className={css.title}>Contacts</h2>
+                    <ContactsSearch handleChange={handleFind} />
                 </div>
             </div>
         );
