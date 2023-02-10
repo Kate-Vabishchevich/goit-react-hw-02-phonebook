@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import css from './MyContacts.module.css';
 import ContactsForm from "./ContactsForm/ContactsForm";
 import ContactsSearch from "./ContactsSearch/ContactsSearch";
+import ContactsList from "./ContactsList/ContactsList";
 
 class MyContacts extends Component {
     state = {
@@ -43,12 +44,36 @@ class MyContacts extends Component {
         return Boolean(result);
     };
 
-    handleFind = ({ target }) => {
+    handleSearch = ({ target }) => {
         this.setState({ filter: target.value });
     };
 
+    getFilteredContacts() {
+        const { filter, contacts } = this.state;
+        if  (!filter ) {
+            return contacts;
+        }
+
+        const normalizedSearch = filter.toLowerCase();
+        const result = contacts.filter(({ name }) => {
+            return name.toLocaleLowerCase().includes(normalizedSearch)
+        });
+        return result;
+    };
+
+    removeContact = id => {
+        this.setState(({ contacts }) => {
+            const newContacts = contacts.filter(contact => contact.id !== id);
+            return { contacts: newContacts };
+        });
+    };
+
+
     render() {
-        const { addContact, handleFind } = this;
+        const { addContact, handleSearch, removeContact } = this;
+        const peoples = this.getFilteredContacts;
+        const isContacts = Boolean(peoples.length);
+
         return (
             <div>
                 <div>
@@ -58,12 +83,15 @@ class MyContacts extends Component {
 
                 <div>
                     <h2 className={css.title}>Contacts</h2>
-                    <ContactsSearch handleChange={handleFind} />
+                    <ContactsSearch handleChange={handleSearch} />
+                    {isContacts && (<ContactsList removeContact={removeContact} contacts={peoples} />)}
+                    {!isContacts && <p>No contacts in the list</p>}
+                    <ContactsList removeContact={removeContact}/>
+                    
                 </div>
             </div>
         );
     }
-
 };
 
 export default MyContacts;
