@@ -39,7 +39,7 @@ class MyContacts extends Component {
         const normalizedName = name.toLowerCase();
         const { contacts } = this.state;
         const result = contacts.find(({ name }) => {
-            return name.toLocaleLowerCase === normalizedName;
+            return name.toLocaleLowerCase() === normalizedName;
         });
         return Boolean(result);
     };
@@ -71,22 +71,20 @@ class MyContacts extends Component {
 
     render() {
         const { addContact, handleSearch, removeContact } = this;
-        const peoples = this.getFilteredContacts;
-        const isContacts = Boolean(peoples.length);
+        const peoples = this.getFilteredContacts();
+        const isContacts = peoples.length !== 0;
 
         return (
-            <div>
-                <div>
+            <div className={css.wrapper}>
+                <div className={css.block}>
                     <h2 className={css.title}>Phonebook</h2>
                     <ContactsForm onSubmit={addContact} />
                 </div>
-
-                <div>
+                <div className={css.block}>
                     <h2 className={css.title}>Contacts</h2>
                     <ContactsSearch handleChange={handleSearch} />
                     {isContacts && (<ContactsList removeContact={removeContact} contacts={peoples} />)}
                     {!isContacts && <p>No contacts in the list</p>}
-                    <ContactsList removeContact={removeContact}/>
                     
                 </div>
             </div>

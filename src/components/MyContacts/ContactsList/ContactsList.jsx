@@ -19,31 +19,6 @@ const ContactsList = ({ removeContact, contacts }) => {
   return <ol className={ css.list}>{items}</ol>;
 };
 
-// const ContactsList = ({ removeContact, contacts }) => {
-//   <ul className={css.list}>
-//     {contacts.map(({ id, name, number }) => (
-//       <li className={css.item}
-//         key={id}
-//         name={name}
-//         number={number}
-        
-//       >
-        
-//         <p>{name}: {number}</p>
-//         <button
-//           className={css.btn}
-//           onClick={() => removeContact(id)}
-//           type="button"
-//         >
-//           Delete
-//         </button>
-//       </li>
-//     ))}
-    
-//   </ul>
-// };
-
-
 export default ContactsList;
 
 ContactsList.propTypes = {

@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 
 const ContactsSearch = ({ handleChange }) => {
     return (
-        <div>
-            <label>
-                Find contacts by name
+        <div className={css.group}>
+            <label>Find contacts by name:</label>
                 <input
                     className={css.input}
                     type="text"
@@ -13,7 +12,7 @@ const ContactsSearch = ({ handleChange }) => {
                     onChange={handleChange}
                     placeholder="Enter name"
                 />
-            </label>
+            
         </div>
     );
 };
