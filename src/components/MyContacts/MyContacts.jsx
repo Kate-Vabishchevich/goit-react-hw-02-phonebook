@@ -17,9 +17,10 @@ class MyContacts extends Component {
     };
 
     addContact = ({ name, number }) => {
-        if (this.isDublicate(name, number)) {
+        if (this.isDublicate(name)) {
             alert(`${name} is already in contacts.`);
-            return false;
+
+            this.reset();
         }
 
         this.setState(prevState => {
@@ -34,6 +35,10 @@ class MyContacts extends Component {
         });
         return true;
     };
+
+    reset = () => {
+        this.setState({ name: '' });
+    }
 
     isDublicate(name) {
         const normalizedName = name.toLowerCase();
